@@ -1,2 +1,0 @@
-(this.webpackJsonpkaupunkifillari=this.webpackJsonpkaupunkifillari||[]).push([[0],{9:function(e,n,t){"use strict";t.r(n);var i=t(0),r=t.n(i),c=t(3),s=t.n(c),u=t(1),a=function(){return Object(u.jsx)("div",{children:"App"})};s.a.render(Object(u.jsx)(r.a.StrictMode,{children:Object(u.jsx)(a,{})}),document.getElementById("root"))}},[[9,1,2]]]);
-//# sourceMappingURL=main.167e70dc.chunk.js.map
