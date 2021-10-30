@@ -1,12 +1,15 @@
 import React from 'react';
-import {} from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+import Main from './components/main';
+import StationInfo from './components/stationInfo';
 
 
 const App: React.FC = () => {
   return (
-    <div>
-      App
-    </div>
+    <Switch>
+      <Route exact path='/' component={Main} />
+      <Route exact path='/station/:stationName' component={StationInfo} />
+    </Switch>
   )
 }
 

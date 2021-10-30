@@ -19,20 +19,25 @@ export interface IBikeStations {
  * @returns IBikeStation
  */
 const GetBikeStationStatusAsync = async (stationName: string) => {
-  const response = await fetch('https://kaupunkifillarit.fi/api/stations', {
+  const response = await fetch('https://us-central1-kaupunkifillarit-aed04.cloudfunctions.net/api/getStations', {
     method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
   });
 
-  const {data, errors} = await response.json();
+  const dataText = await response.text();
+  console.log(dataText);
+  const data: IBikeStations = JSON.parse(dataText);
   if (response.ok) {
     const stations: IBikeStations = data;
     const station = stations.bikeRentalStations.find(x => x.name === stationName);
+    console.log('station', station)
     return !!station
     ? station
     : Promise.reject(Error('The station name you entered cannot be found'));
   }
-  const error = new Error(errors?.map((e: any) => e.message).join('\n') ?? 'unknown');
-  Promise.reject(error);
+  Promise.reject(new Error('ERROR'));
 };
 
 export default GetBikeStationStatusAsync;
