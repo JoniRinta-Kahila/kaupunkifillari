@@ -10,6 +10,7 @@ export const setupRootStore = () => {
   const storeProcessor = types.snapshotProcessor(RootStoreModel, {
     postProcessor: x => {
       const copy = {...x} as any;
+      delete copy.Stations
       return copy;
     },
   });
