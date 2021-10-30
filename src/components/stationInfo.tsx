@@ -39,6 +39,14 @@ const StationInfo: React.FC = observer(() => {
     inFavs ? delFavorite(station.name) : addFavorite(station.name);
   }
 
+  const ActionItem = () => {
+    return snap.favorites.length < 2
+    ? (
+      <Search displayHeader={false} />
+    )
+    : <button><Link to='/'>Valitse toinen asemat</Link></button>
+  }
+
   return station
   ? (
       <div className={styles.container}>
@@ -65,14 +73,10 @@ const StationInfo: React.FC = observer(() => {
             {/* / {station.spacesAvailable} */}
           </p>
           <p style={station.active ? {color: 'greenyellow'} : {color:'red'}}>Asema {station.active ? 'on käytössä': 'ei ole käytössä'}</p>
-        </div>
 
-        {
-          snap.favorites.length === 1
-          ? <Search displayHeader={false} />
-          : <button><Link to='/'>Katso kaikki asemat</Link></button>
-        }
-        
+          {/* Search bar OR btn back */}
+          <ActionItem />
+        </div>
       </div>
     )
   : (

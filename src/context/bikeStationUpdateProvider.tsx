@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import { useStores } from '../mst/rootStoreContext';
 
-const BikeStationUpdateProvider: React.FC = ({children}) => {
+type BikeStationUpdateProviderProps = {
+  updateFrequency?: number, // ms
+}
+
+const BikeStationUpdateProvider: React.FC<BikeStationUpdateProviderProps> = ({updateFrequency = 120000, children}) => {
 
   const { fetchStationDataAsync } = useStores();
   
@@ -11,9 +15,9 @@ const BikeStationUpdateProvider: React.FC = ({children}) => {
     const intervall = setInterval(() => {
       console.info('Updating data...');
       fetchStationDataAsync();
-    }, 60000);
+    }, updateFrequency);
     return () => clearInterval(intervall);    
-  }, [fetchStationDataAsync]);
+  }, [fetchStationDataAsync, updateFrequency]);
 
   return (
     <div>
