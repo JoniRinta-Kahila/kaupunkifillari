@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import GetBikeStationStatusAsync, { IBikeStation } from '../scripts/getBikeStationStatusAsync';
+import styles from './stationInfo.module.scss';
 
 const StationInfo: React.FC = () => {
   const params = useParams<any>();
@@ -22,8 +23,12 @@ const StationInfo: React.FC = () => {
 
   return !!station
   ? (
-      <div>
-        <p>Station name: {station.name}</p>
+      <div className={styles.container}>
+        <button>
+          <Link to='/'> Back to main </Link>
+        </button>
+        <h1>{station.name}</h1>
+        <p>Station is {station.active ? 'online': 'offline'}</p>
         <p>Bikes available {station.bikesAvailable}</p>
         <p>Station capacity {station.bikesAvailable}</p>
       </div>
