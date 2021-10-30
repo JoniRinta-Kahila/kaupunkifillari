@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import styles from './stationInfo.module.scss';
 import { observer } from 'mobx-react-lite';
 import { useStores } from '../mst/rootStoreContext';
@@ -52,7 +52,7 @@ const StationInfo: React.FC = observer(() => {
             }
           </i>
         </span>
-        
+
         <div>
           <p
             style={
@@ -67,7 +67,12 @@ const StationInfo: React.FC = observer(() => {
           <p style={station.active ? {color: 'greenyellow'} : {color:'red'}}>Asema {station.active ? 'on käytössä': 'ei ole käytössä'}</p>
         </div>
 
-        <Search displayHeader={false} />
+        {
+          snap.favorites.length === 1
+          ? <Search displayHeader={false} />
+          : <button><Link to='/'>Katso kaikki asemat</Link></button>
+        }
+        
       </div>
     )
   : (
