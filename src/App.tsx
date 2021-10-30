@@ -7,6 +7,7 @@ import { RootStore } from './mst';
 import { setupRootStore } from './mst/setup';
 import { RootStoreProvider } from './mst/rootStoreContext';
 import BikeStationUpdateProvider from './context/bikeStationUpdateProvider';
+import Search from './components/search';
 
 const App: React.FC = () => {
   const [rootTree, setRootTree] = useState<RootStore|undefined>();
@@ -22,6 +23,7 @@ const App: React.FC = () => {
         <div className={styles.container}>
           <Switch>
             <Route exact path='/' component={Main} />
+            <Route exact path='/search' component ={Search} />
             <Route exact path='/station/:stationName' component={StationInfo} />
           </Switch>
         </div>

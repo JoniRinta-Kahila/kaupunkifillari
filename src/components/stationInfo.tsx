@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styles from './stationInfo.module.scss';
 import { observer } from 'mobx-react-lite';
 import { useStores } from '../mst/rootStoreContext';
 import { RootStoreSnapshot, Station } from '../mst';
 import { getSnapshot, onSnapshot } from 'mobx-state-tree';
 import { AiOutlineStar, AiTwotoneStar } from 'react-icons/ai';
+import Search from './search';
 
 const StationInfo: React.FC = observer(() => {
   const [station, setStation] = useState<Station>();
@@ -41,30 +42,32 @@ const StationInfo: React.FC = observer(() => {
   return station
   ? (
       <div className={styles.container}>
-        <h1 style={{color: 'azure'}}>{station.name}</h1>
+        <span style={{display:'flex', flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+          <h1 style={{color: 'azure'}}>{station.name}</h1>
+          <i onClick={() => handleFavorite()}>
+            {
+              favorite
+                ? <AiTwotoneStar size='32' color='yellow' />
+                : <AiOutlineStar size='32'/>
+            }
+          </i>
+        </span>
+        
+        <div>
+          <p
+            style={
+              station.bikesAvailable < 1
+              ? {color: 'red'}
+              : {color: 'snow'}
+            }
+          >
+            Fillareita vapaana {station.bikesAvailable}
+            {/* / {station.spacesAvailable} */}
+          </p>
+          <p style={station.active ? {color: 'greenyellow'} : {color:'red'}}>Asema {station.active ? 'on käytössä': 'ei ole käytössä'}</p>
+        </div>
 
-        <i onClick={() => handleFavorite()}>
-          {
-            favorite
-              ? <AiTwotoneStar size='28' color='yellow' />
-              : <AiOutlineStar size='28'/>
-          }
-        </i>
-
-        <p
-          style={
-            station.bikesAvailable < 1
-            ? {color: 'red'}
-            : {color: 'snow'}
-          }
-        >
-          Fillareita vapaana {station.bikesAvailable}
-           {/* / {station.spacesAvailable} */}
-        </p>
-        <p style={station.active ? {color: 'greenyellow'} : {color:'red'}}>Asema {station.active ? 'on käytössä': 'ei ole käytössä'}</p>
-        <button>
-          <Link to='/'> Valitse toinen asema </Link>
-        </button>
+        <Search displayHeader={false} />
       </div>
     )
   : (

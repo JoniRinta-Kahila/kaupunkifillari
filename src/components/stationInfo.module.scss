@@ -26,4 +26,11 @@
     color: black;
     font-weight: 700;
   }
+
+  i {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin: 5px;
+  }
 }
