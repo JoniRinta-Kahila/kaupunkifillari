@@ -29,12 +29,12 @@ const StationInfo: React.FC = observer(() => {
             : {color: 'snow'}
           }
         >
-          Bikes available {station.bikesAvailable}
+          Fillareita vapaana {station.bikesAvailable}
            {/* / {station.spacesAvailable} */}
         </p>
-        <p style={station.active ? {color: 'greenyellow'} : {color:'red'}}>Station is {station.active ? 'online': 'offline'}</p>
+        <p style={station.active ? {color: 'greenyellow'} : {color:'red'}}>Asema {station.active ? 'on käytössä': 'ei ole käytössä'}</p>
         <button>
-          <Link to='/'> Back to main </Link>
+          <Link to='/'> Valitse toinen asema </Link>
         </button>
       </div>
     )

@@ -24,7 +24,7 @@ const Main: React.FC = observer(() => {
         id="combo-box-demo"
         options={stations.map(x => x.name).filter(onlyUnique)}
         sx={{ width: 300, background:'azure' }}
-        renderInput={(params) => <TextField {...params} label="Select your station" />}
+        renderInput={(params) => <TextField {...params} label="Valitse polkupyöräasema" />}
       />
     </div>
   )
