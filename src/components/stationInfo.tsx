@@ -7,6 +7,7 @@ import { RootStoreSnapshot, Station } from '../mst';
 import { getSnapshot, onSnapshot } from 'mobx-state-tree';
 import { AiOutlineStar, AiTwotoneStar } from 'react-icons/ai';
 import Search from './search';
+import fillari from '../media/fillari192.png';
 
 const StationInfo: React.FC = observer(() => {
   const [station, setStation] = useState<Station>();
@@ -48,38 +49,49 @@ const StationInfo: React.FC = observer(() => {
   return station
   ? (
       <div className={styles.container}>
-        <span style={{display:'flex', flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
-          <h1 style={{color: 'azure'}}>{station.name}</h1>
-          <i onClick={() => handleFavorite()}>
-            {
-              favorite
-                ? <AiTwotoneStar size='32' color='yellow' />
-                : <AiOutlineStar size='32'/>
-            }
-          </i>
-        </span>
 
-        <div>
+        <div className={styles.header}>
+          <img src={fillari} alt='fillari'/>
+          {/* <u style={{color:'darkgreen'}}><h1 style={{marginTop:0, fontSize:'5vh', color:'#fff'}}>Omat kaupunkifillarit</h1></u> */}
+          <span style={{display:'flex', flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+            <h1 style={{color: 'azure', margin:0, fontSize:'5vh'}}>{station.name}</h1>
+            <i onClick={() => handleFavorite()}>
+              {
+                favorite
+                  ? <AiTwotoneStar size='32' color='yellow' />
+                  : <AiOutlineStar size='32'/>
+              }
+            </i>
+          </span>
+          <p style={station.active ? {color: 'greenyellow', margin:0, textAlign:'center', fontSize:'15px'} : {color:'red', textAlign:'center', fontSize:'15px'}}>Asema {station.active ? 'on käytössä': 'ei ole käytössä'}</p>
+        </div>
+
+        <div className={styles.content}>
+
+
           <p
             style={
               station.bikesAvailable < 1
-              ? {color: 'red'}
-              : {color: 'snow'}
+              ? {color: '#bd0000', margin:0, flexGrow:1, fontSize: '5vh', fontWeight:700, textShadow: '2px 2px #b59a9a'}
+              : {color: 'snow', margin:0, flexGrow:1, fontSize: '5vh', fontWeight:700, textShadow: '2px 2px #61a6e7'}
             }
-          >
-            Fillareita vapaana {station.bikesAvailable}
-            {/* / {station.spacesAvailable} */}
+          > Fillareita vapaana {station.bikesAvailable}
           </p>
-          <p style={station.active ? {color: 'greenyellow'} : {color:'red'}}>Asema {station.active ? 'on käytössä': 'ei ole käytössä'}</p>
 
-          {/* Search bar OR btn back */}
-          <ActionItem />
+
+          <ActionItem /> {/* Search bar OR btn back */}
         </div>
+
+        <div className={styles.footer}>
+          <p>Asenna mobiilisovellus <Link to='/help'>OHJE</Link></p>
+        </div>
+
       </div>
     )
   : (
       <div>
-        <p>NO_DATA</p>
+        {/* TODO add load indicator */}
+        <p>NO_DATA</p> 
       </div>
     )
 })
