@@ -17,15 +17,7 @@ export const StationModel = t.model('Station', {
 
 export const StationsModel = t.model('Stations', {
   bikeRentalStations: t.array(StationModel),
-})
-
-// export const FavoriteModel = t.model('Favorite', {
-//   favoriteName: t.maybe(t.string),// t.string,
-// });
-
-// export const FavoritesModel = t.model('Favorites', {
-//   favorites: t.array(FavoriteModel),
-// })
+});
 
 export const RootStoreModel = t
   .model('Root', {
@@ -51,11 +43,12 @@ export const RootStoreModel = t
     },
     fetchStationDataAsync: flow(function* () {
       try {
-        const response: Response = yield fetch('https://us-central1-kaupunkifillarit-aed04.cloudfunctions.net/api/getStations', {
-          method: 'GET',
+        const response: Response = yield fetch('https://us-central1-kaupunkifillarit-aed04.cloudfunctions.net/getStationsData', {
+          method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-          }
+          },
+          body: JSON.stringify({data:{}}),
         });
         const dataText = yield response.text();
         const data: Stations = JSON.parse(dataText);
@@ -69,12 +62,6 @@ export const RootStoreModel = t
       }
     })
   }));
-
-// export interface Favorites extends Instance<typeof FavoritesModel> { };
-// export interface FavoritesModelSnapshot extends SnapshotOut<typeof FavoritesModel> { };
-
-// export interface Favorite extends Instance<typeof FavoriteModel> { };
-// export interface FavoriteModelSnapshot extends SnapshotOut<typeof FavoriteModel> { };
 
 export interface Station extends Instance<typeof StationModel> { };
 export interface StationSnapshot extends SnapshotOut<typeof StationModel> { };
