@@ -4,6 +4,8 @@ import {
   types as t,
   flow
 } from 'mobx-state-tree';
+import * as functions from 'firebase/functions';
+import FirebaseServices from '../firebase/firebaseService';
 
 export const StationModel = t.model('Station', {
   id: t.string,
@@ -42,24 +44,31 @@ export const RootStoreModel = t
       self.favorites.replace(self.favorites.filter(x => x.name !== station.name));
     },
     fetchStationDataAsync: flow(function* () {
-      try {
-        const response: Response = yield fetch('https://us-central1-kaupunkifillarit-aed04.cloudfunctions.net/getStationsData', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({data:{}}),
-        });
-        const dataText = yield response.text();
-        const data: Stations = JSON.parse(dataText);
-        if (response.ok) {
-          self.stations.replace(data.bikeRentalStations);
-          return;
-        }
-        console.error('NOTHING TO FETCH');
-      } catch (err) {
-        console.error('MST:', err);
-      }
+      const functionsInstance = FirebaseServices.getFunctionsInstance();
+      const action: () => Promise<functions.HttpsCallableResult<Stations>> = functions.httpsCallable(functionsInstance, '', {timeout: 70000});
+      const data = action()
+        .then(data => data);
+      const result = (yield data).data;
+      console.log(result)
+      self.stations.replace(result.bikeRentalStations);
+      // try {
+      //   const response: Response = yield fetch('https://us-central1-kaupunkifillarit-aed04.cloudfunctions.net/getStationsData', {
+      //     method: 'POST',
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //     },
+      //     body: JSON.stringify({data:{}}),
+      //   });
+      //   const dataText = yield response.text();
+      //   const data: Stations = JSON.parse(dataText);
+      //   if (response.ok) {
+      //     self.stations.replace(data.bikeRentalStations);
+      //     return;
+      //   }
+      //   console.error('NOTHING TO FETCH');
+      // } catch (err) {
+      //   console.error('MST:', err);
+      // }
     })
   }));
 
