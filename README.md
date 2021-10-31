@@ -3,7 +3,7 @@
 
 # Tarkasta asemakohtainen kaupunkifillari tilanne
 
-## [Linkki online sovellukseen](https://jonirinta-kahila.github.io/kaupunkifillari/).
+## [Linkki online sovellukseen](kaupunkifillarit-aed04.web.app).
 
 ### [CONTRIBUTING](https://github.com/JoniRinta-Kahila/kaupunkifillari/blob/master/CONTRIBUTING.md)
 
