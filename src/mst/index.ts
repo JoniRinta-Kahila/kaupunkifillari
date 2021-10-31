@@ -45,30 +45,11 @@ export const RootStoreModel = t
     },
     fetchStationDataAsync: flow(function* () {
       const functionsInstance = FirebaseServices.getFunctionsInstance();
-      const action: () => Promise<functions.HttpsCallableResult<Stations>> = functions.httpsCallable(functionsInstance, '', {timeout: 70000});
-      const data = action()
+      const endpointCall: () => Promise<functions.HttpsCallableResult<Stations>> = functions.httpsCallable(functionsInstance, 'getStationsData', {timeout: 70000});
+      const data = endpointCall()
         .then(data => data);
       const result = (yield data).data;
-      console.log(result)
       self.stations.replace(result.bikeRentalStations);
-      // try {
-      //   const response: Response = yield fetch('https://us-central1-kaupunkifillarit-aed04.cloudfunctions.net/getStationsData', {
-      //     method: 'POST',
-      //     headers: {
-      //       'Content-Type': 'application/json',
-      //     },
-      //     body: JSON.stringify({data:{}}),
-      //   });
-      //   const dataText = yield response.text();
-      //   const data: Stations = JSON.parse(dataText);
-      //   if (response.ok) {
-      //     self.stations.replace(data.bikeRentalStations);
-      //     return;
-      //   }
-      //   console.error('NOTHING TO FETCH');
-      // } catch (err) {
-      //   console.error('MST:', err);
-      // }
     })
   }));
 
