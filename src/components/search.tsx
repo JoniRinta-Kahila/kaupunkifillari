@@ -24,7 +24,7 @@ const Search: React.FC<SearchProps> = observer(({displayHeader = true}) => {
 
       {
         displayHeader
-        ? <h1 style={{color:'azure', textAlign:'center'}}>Kaupunkifillarit</h1>
+        ? <h1 style={{color:'azure', textAlign:'center'}}>Omat kaupunkifillarit</h1>
         : null
       }
       <Autocomplete
