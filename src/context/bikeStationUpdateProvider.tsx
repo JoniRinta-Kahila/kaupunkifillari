@@ -10,7 +10,7 @@ const BikeStationUpdateProvider: React.FC<BikeStationUpdateProviderProps> = ({up
   const { fetchStationDataAsync } = useStores();
   
   useEffect(() => {
-    console.log('USEEFFECT')
+    // console.log('USEEFFECT')
     fetchStationDataAsync();
     const intervall = setInterval(() => {
       console.info('Updating data...');

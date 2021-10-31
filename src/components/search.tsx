@@ -10,7 +10,7 @@ type SearchProps = {
 }
 
 const Search: React.FC<SearchProps> = observer(({displayHeader = true}) => {
-  const { stations} = useStores();
+  const { stations } = useStores();
   const [redirectTo, setRedirectTo] = useState<string>();
 
   if (redirectTo) return <Redirect to={`/station/${redirectTo}`} />
@@ -28,10 +28,19 @@ const Search: React.FC<SearchProps> = observer(({displayHeader = true}) => {
         : null
       }
       <Autocomplete
+        renderOption={(props, option, asd) => {
+          return (
+            <li {...props} key={option.id}>
+              {option.name}
+            </li>
+          )
+        }}
         disablePortal
-        onChange={(e:any) => setRedirectTo(e.target.textContent)}
+        onChange={(e, a) => setRedirectTo(a?.id)}
+        getOptionLabel={(option) => option.name}
         id="combo-box-demo"
-        options={stations.map(x => x.name).filter(onlyUnique)}
+        // options={stations.map(x => x.name).filter(onlyUnique)}
+        options={stations.map(x => x).filter(onlyUnique)}
         sx={{ width: 300, background:'azure' }}
         renderInput={(params) => <TextField {...params} label="Valitse polkupyöräasema" />}
       />

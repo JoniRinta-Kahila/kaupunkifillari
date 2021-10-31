@@ -18,25 +18,23 @@ const StationInfo: React.FC = observer(() => {
   onSnapshot(useStores(), (newSnapshot) => setSnap(newSnapshot));
 
   const params = useParams<any>();
-  const stationReq: string = params.stationName;
+  const stationReq: string = params.stationId;
 
   useEffect(() => {
-    console.info('stationInfo ue running ...')
-    console.info(snap.favorites)
-    const currentSation = snap.stations.find(x => x.name === stationReq);
+    const currentSation = snap.stations.find(x => x.id === stationReq);
     setStation(currentSation);
 
     if (!station) return;
-    const inFavs = snap.favorites.find(x => x.favoriteName === station.name);
+    const inFavs = snap.favorites.find(x => x.name === station.name);
     setFavorite(!!inFavs);
     
   }, [snap.favorites, snap.stations, station, stationReq]);
 
   const handleFavorite = () => {
     if (!station) return;
-    const inFavs = snap.favorites.find(x => x.favoriteName === station.name);
+    const inFavs = snap.favorites.find(x => x.name === station.name);
     setFavorite(!inFavs);
-    inFavs ? delFavorite(station.name) : addFavorite(station.name);
+    inFavs ? delFavorite(station) : addFavorite(station);
   }
 
   const ActionItem = () => {

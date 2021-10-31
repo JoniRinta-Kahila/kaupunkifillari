@@ -24,7 +24,7 @@ const App: React.FC = () => {
           <Switch>
             <Route exact path='/' component={Main} />
             <Route exact path='/search' component ={Search} />
-            <Route exact path='/station/:stationName' component={StationInfo} />
+            <Route exact path='/station/:stationId' component={StationInfo} />
           </Switch>
         </div>
       </BikeStationUpdateProvider>

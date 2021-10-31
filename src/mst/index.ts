@@ -19,9 +19,9 @@ export const StationsModel = t.model('Stations', {
   bikeRentalStations: t.array(StationModel),
 })
 
-export const FavoriteModel = t.model('Favorite', {
-  favoriteName: t.maybe(t.string),// t.string,
-});
+// export const FavoriteModel = t.model('Favorite', {
+//   favoriteName: t.maybe(t.string),// t.string,
+// });
 
 // export const FavoritesModel = t.model('Favorites', {
 //   favorites: t.array(FavoriteModel),
@@ -30,26 +30,24 @@ export const FavoriteModel = t.model('Favorite', {
 export const RootStoreModel = t
   .model('Root', {
     stations: t.array(StationModel),
-    favorites: t.array(FavoriteModel),
+    favorites: t.array(StationModel),
   })
   .actions(self => ({
-    addFavorite(stationName: string) {
-      const exists = self.favorites.find(x => x.favoriteName === stationName);
+    addFavorite(station: Station) {
+      const exists = self.favorites.find(x => x.name === station.name);
       if (exists) {
-        console.info(stationName, 'is allready in favorites');
+        console.info(station.name, 'is allready in favorites');
         return;
       }
-      self.favorites.push({favoriteName: stationName});
-      console.log('favorite added')
+      self.favorites.push(station);
     },
-    delFavorite(stationName: string) {
-      const exists = self.favorites.find(x => x.favoriteName === stationName);
+    delFavorite(station: Station) {
+      const exists = self.favorites.find(x => x.name === station.name);
       if (!exists) {
-        console.info(stationName, 'is not part of favoritelist');
+        console.info(station.name, 'is not part of favoritelist');
         return;
       }
-      self.favorites.replace(self.favorites.filter(x => x.favoriteName !== stationName));
-      console.log('favorite deleted')
+      self.favorites.replace(self.favorites.filter(x => x.name !== station.name));
     },
     fetchStationDataAsync: flow(function* () {
       try {
@@ -75,8 +73,8 @@ export const RootStoreModel = t
 // export interface Favorites extends Instance<typeof FavoritesModel> { };
 // export interface FavoritesModelSnapshot extends SnapshotOut<typeof FavoritesModel> { };
 
-export interface Favorite extends Instance<typeof FavoriteModel> { };
-export interface FavoriteModelSnapshot extends SnapshotOut<typeof FavoriteModel> { };
+// export interface Favorite extends Instance<typeof FavoriteModel> { };
+// export interface FavoriteModelSnapshot extends SnapshotOut<typeof FavoriteModel> { };
 
 export interface Station extends Instance<typeof StationModel> { };
 export interface StationSnapshot extends SnapshotOut<typeof StationModel> { };
