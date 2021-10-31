@@ -51,7 +51,7 @@ const StationInfo: React.FC = observer(() => {
       <div className={styles.container}>
 
         <div className={styles.header}>
-          <img src={fillari} alt='fillari'/>
+          <Link to='/'><img src={fillari} alt='fillari'/></Link>
           {/* <u style={{color:'darkgreen'}}><h1 style={{marginTop:0, fontSize:'5vh', color:'#fff'}}>Omat kaupunkifillarit</h1></u> */}
           <span style={{display:'flex', flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
             <h1 style={{color: 'azure', margin:0, fontSize:'5vh'}}>{station.name}</h1>
@@ -66,19 +66,22 @@ const StationInfo: React.FC = observer(() => {
           <p style={station.active ? {color: 'greenyellow', margin:0, textAlign:'center', fontSize:'15px'} : {color:'red', textAlign:'center', fontSize:'15px'}}>Asema {station.active ? 'on käytössä': 'ei ole käytössä'}</p>
         </div>
 
-        <div className={styles.content}>
-
-
-          <p
+        <div className={styles.bikesAvailable}>
+          <div className={styles.len}>
+            <p>{station.bikesAvailable}</p>
+          </div>
+          <h1
             style={
               station.bikesAvailable < 1
-              ? {color: '#bd0000', margin:0, flexGrow:1, fontSize: '5vh', fontWeight:700, textShadow: '2px 2px #b59a9a'}
-              : {color: 'snow', margin:0, flexGrow:1, fontSize: '5vh', fontWeight:700, textShadow: '2px 2px #61a6e7'}
+              ? {color: '#bd0000', textShadow: '2px 2px #b59a9a'}
+              : {color: 'snow', textShadow: '2px 2px #61a6e7'}
             }
-          > Fillareita vapaana {station.bikesAvailable}
-          </p>
+          >
+            Fillaria vapaana
+          </h1>
+        </div>
 
-
+        <div className={styles.content}>
           <ActionItem /> {/* Search bar OR btn back */}
         </div>
 

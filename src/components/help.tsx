@@ -60,7 +60,7 @@ const Help: React.FC = () => {
       </div>
 
       <div className={styles.content} >
-        <Box sx={{borderBottom: 1, borderColor: 'divider' }}>
+        <Box /*sx={{borderBottom: 1, borderColor: 'divider' }}*/>
           <Tabs value={tabValue} onChange={handleChange} centered>
             <Tab icon={<GrAndroid size={30} />} label='Android' {...a11yProps(0)} />
             <Tab icon={<GrApple size={30} />} label='iPad tai iPhone' {...a11yProps(1)} />
