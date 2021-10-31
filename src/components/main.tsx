@@ -5,11 +5,7 @@ import fillari from '../media/fillari192.png';
 import { Link } from 'react-router-dom';
 import styles from './main.module.scss';
 
-type MainProps = {
-
-}
-
-const Main: React.FC<MainProps> = () => {
+const Main: React.FC = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
