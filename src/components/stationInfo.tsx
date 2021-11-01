@@ -61,7 +61,7 @@ const StationInfo: React.FC = observer(() => {
         <div className={styles.header}>
           <Link to='/'><img src={fillari} alt='fillari'/></Link>
           <span style={{display:'flex', flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
-            <h1 style={{color: 'azure', margin:0, fontSize:'5vh'}}>{station.name}</h1>
+            <h1>{station.name}</h1>
             <i onClick={() => handleFavorite()}>
               {
                 favorite

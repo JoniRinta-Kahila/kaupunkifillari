@@ -11,7 +11,7 @@ const Main: React.FC = () => {
     <div className={styles.container}>
       <div className={styles.header}>
         <img src={fillari} alt='fillari'/>
-        <u style={{color:'darkgreen'}}><h1 style={{marginTop:0, fontSize:'5vh', color:'#fff'}}>Omat kaupunkifillarit</h1></u>
+        <u style={{color:'darkgreen'}}><h1>Omat kaupunkifillarit</h1></u>
       </div>
 
 
