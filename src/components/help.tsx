@@ -7,6 +7,9 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import { GrApple, GrAndroid } from 'react-icons/gr';
+import { Translator, useLocalization } from 'localization-react';
+import { ITranslation } from 'localization-react/dist/translator';
+import translationsJson from '../localization/translations.json';
 
 // https://natomasunified.org/kb/add-website-to-mobile-device-home-screen/
 
@@ -44,6 +47,10 @@ const TabPanel = (props: ITabPanelProps) => {
 }
 
 const Help: React.FC = () => {
+  const { language } = useLocalization();
+  const locales: ITranslation = translationsJson;
+  const translator = new Translator(locales, 'help', language);
+
   const [tabValue, setTabValue] = useState<number>(0);
 
   const handleChange = 
@@ -67,22 +74,22 @@ const Help: React.FC = () => {
           </Tabs>
           <TabPanel value={tabValue} index={0}>
             <ol>
-              <li>Avaa <b>Omat kaupunkifillarit</b> sovelus <b>Chrome</b> selaimella.</li>
-              <li>Avaa selaimen valikko (3 pistettä oikeassa ylä kulmassa).</li>
-              <li>Valitse valikosta <b>Lisää aloitusnäyttöön.</b></li>
+              <li dangerouslySetInnerHTML={{ __html: translator.getLocaleString('part_1_chrome')}} />
+              <li>{translator.getLocaleString('part_2_chrome')}</li>
+              <li dangerouslySetInnerHTML={{ __html: translator.getLocaleString('part_3_chrome')}} />
             </ol>
           </TabPanel>
           <TabPanel value={tabValue} index={1}>
             <ol>
-              <li>Avaa <b>Omat kaupunkifillarit</b> sovelus <b>Safari</b> selaimella.</li>
-              <li>Avaa selaimen pudotusvalikko, selaimen yläosassa näkyvästä kuvakkeesta jossa laatikosta osoittaa nuoli oikealle.</li>
-              <li>Napauta <b>Lisää aloitusnäyttöön</b>.</li>
+              <li dangerouslySetInnerHTML={{ __html: translator.getLocaleString('part_1_safari')}} />
+              <li>{translator.getLocaleString('part_2_safari')}</li>
+              <li dangerouslySetInnerHTML={{ __html: translator.getLocaleString('part_3_safari')}} />
             </ol>
           </TabPanel>
         </Box>
       </div>
 
-      <Link className={styles.back} to='/'>SULJE OHJE</Link>
+      <Link className={styles.back} to='/'>{translator.getLocaleString('exit_guide')}</Link>
     </div>
   )
 }

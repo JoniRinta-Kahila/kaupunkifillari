@@ -1,7 +1,7 @@
-import { Translator, useLocalization } from 'localization-react';
-import { ITranslation } from 'localization-react/dist/translator';
 import React from 'react';
 import CookieConsent from 'react-cookie-consent';
+import { Translator, useLocalization } from 'localization-react';
+import { ITranslation } from 'localization-react/dist/translator';
 import translationsJson from '../localization/translations.json';
 
 const CookieAlert: React.FC = () => {

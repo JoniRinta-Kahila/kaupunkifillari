@@ -4,7 +4,15 @@
       "app_name": "Omat kaupunkifillarit"
     },
     "favorites": {},
-    "help": {},
+    "help": {
+      "part_1_chrome": "Avaa <b>Omat kaupunkifillarit</b> sovelus <b>Chrome</b> selaimella.",
+      "part_2_chrome": "Avaa selaimen valikko (3 pistettä oikeassa ylä kulmassa).",
+      "part_3_chrome": "Valitse valikosta <b>Lisää aloitusnäyttöön.</b>",
+      "part_1_safari": "Avaa <b>Omat kaupunkifillarit</b> sovelus <b>Safari</b> selaimella.",
+      "part_2_safari": "Avaa selaimen pudotusvalikko, selaimen yläosassa näkyvästä kuvakkeesta jossa laatikosta osoittaa nuoli oikealle.",
+      "part_3_safari": "Napauta <b>Lisää aloitusnäyttöön</b>.",
+      "exit_guide": "SULJE OHJE"
+    },
     "main": {},
     "nearestPlaces": {},
     "search": {},
