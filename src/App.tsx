@@ -10,6 +10,7 @@ import BikeStationUpdateProvider from './context/bikeStationUpdateProvider';
 import Search from './components/search';
 import Help from './components/help';
 import CookieConsent from "react-cookie-consent";
+import LocationContextProvider from './context/locationContextProvider';
 
 const App: React.FC = () => {
   const [rootTree, setRootTree] = useState<RootStore|undefined>();
@@ -21,23 +22,25 @@ const App: React.FC = () => {
 
   return (
     <RootStoreProvider value={rootTree}>
-      <BikeStationUpdateProvider>
-        <div className={styles.container}>
-          <Switch>
-            <Route exact path='/' component={Main} />
-            <Route exact path='/search' component ={Search} />
-            <Route exact path='/station/:stationId' component={StationInfo} />
-            <Route exact path='/help' component={Help} />
-          </Switch>
-          <CookieConsent
-            buttonText='Ymmärrän'
-            location='bottom'
-            visible="byCookieValue"
-          >
-            Omat kaupunkifillarit käyttää keksejä paremman käyttökokemuksen luomiseen. Lisää tietoa evästeistä voit lukea täällä <a href='https://policies.google.com/technologies/cookies?hl=fi-FI'>Googlen evästekäytäntö</a>
-          </CookieConsent>
-        </div>
-      </BikeStationUpdateProvider>
+      <LocationContextProvider>
+        <BikeStationUpdateProvider>
+          <div className={styles.container}>
+            <Switch>
+              <Route exact path='/' component={Main} />
+              <Route exact path='/search' component ={Search} />
+              <Route exact path='/station/:stationId' component={StationInfo} />
+              <Route exact path='/help' component={Help} />
+            </Switch>
+            <CookieConsent
+              buttonText='Ymmärrän'
+              location='bottom'
+              visible="byCookieValue"
+            >
+              Omat kaupunkifillarit käyttää keksejä paremman käyttökokemuksen luomiseen. Lisää tietoa evästeistä voit lukea täällä <a href='https://policies.google.com/technologies/cookies?hl=fi-FI'>Googlen evästekäytäntö</a>
+            </CookieConsent>
+          </div>
+        </BikeStationUpdateProvider>
+      </LocationContextProvider>
     </RootStoreProvider>
   )
 }
