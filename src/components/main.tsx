@@ -2,9 +2,9 @@ import React from 'react';
 import Favorites from './favorites';
 import Search from './search';
 import fillari from '../media/fillari192.png';
-import { Link } from 'react-router-dom';
 import styles from './main.module.scss';
 import NearestPlaces from './nearestPlaces';
+import Footer from './footer';
 
 const Main: React.FC = () => {
   return (
@@ -22,7 +22,7 @@ const Main: React.FC = () => {
       </div>
 
       <div className={styles.footer}>
-        <p>Asenna mobiilisovellus <Link to='/help'>OHJE</Link></p>
+        <Footer />
       </div>
     </div>
   )

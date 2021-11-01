@@ -4,11 +4,7 @@ import { getSnapshot, onSnapshot } from 'mobx-state-tree';
 import { useStores } from '../mst/rootStoreContext';
 import { Link, Redirect } from 'react-router-dom';
 
-type FavoritesProps = {
-
-}
-
-const Favorites: React.FC<FavoritesProps> = () => {
+const Favorites: React.FC = () => {
   const [favs, setFavs] = useState<Station[]>([]);
   const [snap, setSnap] = useState<RootStoreSnapshot>(getSnapshot(useStores()));
   onSnapshot(useStores(), (newSnapshot) => setSnap(newSnapshot));
@@ -22,14 +18,12 @@ const Favorites: React.FC<FavoritesProps> = () => {
     setFavs(favoriteStations);
   }, [snap]);
 
-
-
   return snap.favorites.length > 1 ? (
     <div style={{display:'flex', flexDirection:'row', flexWrap:'wrap', width:'300px', margin:'8px'}}>
       {
         favs.map(x => {
           return (
-            <div style={{background: 'azure', width:'fit-content', padding:'3px 5px', borderRadius:'5px', margin:'5px'}}>
+            <div key={x.id} style={{background: 'azure', width:'fit-content', padding:'3px 5px', borderRadius:'5px', margin:'5px'}}>
               <Link style={{color:'black', textDecoration:'none', fontSize:'20px'}} to={`station/${x.id}`}>{`${x.name}: ${x.bikesAvailable}`}</Link>
             </div>
           )
