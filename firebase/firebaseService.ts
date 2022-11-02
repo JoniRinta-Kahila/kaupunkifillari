@@ -18,7 +18,7 @@ const InitializeAppCheck = () => {
   if (!firebaseInstance) firebaseInstance = initializeApp(firebaseConfig);
 
   return initializeAppCheck(firebaseInstance, {
-    provider: new ReCaptchaV3Provider('6LdyvQYdAAAAAKZD7R1vWhl5PrCyfhHS4zaa6dii'),
+    provider: new ReCaptchaV3Provider('6LeGc9EiAAAAAG0T8bnkEGsqlQG2TBcIUa95gXBx'),
     isTokenAutoRefreshEnabled: true,
   });
 };
